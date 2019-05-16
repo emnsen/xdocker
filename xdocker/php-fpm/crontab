@@ -1,0 +1,2 @@
+# m h d w m user bin-path etc..
+# * * * * * root /usr/local/bin/php /application/bin/console <command>

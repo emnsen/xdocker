@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  nginx-proxy:
+    privileged: true
+    container_name: nginx-proxy
+    image: jwilder/nginx-proxy:alpine
+    ports:
+      - '80:80'
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    restart: always

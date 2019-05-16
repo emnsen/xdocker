@@ -1,0 +1,5 @@
+version: '2'
+syncs:
+  ${NAME}-sync:
+    src: './'
+    sync_strategy: 'unison'
