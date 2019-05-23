@@ -1,10 +1,10 @@
 ### Docker
 
-Çalışma ortamınızda Docker kurulu değilse, [buraya tıklayarak](https://www.docker.com/community-edition) gerekli docker kurulumunu gerçekleştiriniz.
+If you do not have Docker installed in your environment, install the required docker [by clicking here](https://www.docker.com/community-edition).
 
-#### Mevcut Projeye Dahil Etme
+#### Included in the Existing Project
 
-Aşağıdaki komutları sırasıyla çalıştırarak mevcut projenizin içerisine dahil edebilirsiniz.
+You can include the following commands in your current project by running them respectively.
 
 ```bash
 $ git remote add xdocker git@github.com:emnsen/xdocker.git
@@ -12,42 +12,42 @@ $ git remote update
 $ git pull xdocker master
 ```
 
-> **Not:**
+> **Note:**
 >
-> Eğer `$ git pull xdocker master` komutunda sorun yaşıyorsanız, komutun sonuna `--allow-unrelated-histories` ekleyip tekrar çalıştırınız.
+> If you have trouble with the `$ git pull xdocker master` command, add `--allow-unrelated-histories` to the end of the command and run it again.
 >
-> Yukarıdaki opsiyonel seçeneği tek sefer kullandıktan sonra `$ git pull xdocker master` şeklinde kullanmaya devam edebilirsiniz.
+> After using the above option one time, you can continue to use `$ git pull xdocker master`.
 >
-> Örnek; `$ git pull xdocker master --allow-unrelated-histories`
+> Example; `$ git pull xdocker master --allow-unrelated-histories`
 
-#### Kurulum
+#### Setup
 
-Terminalden projenin ana dizinine girin.
+From the terminal, enter the main directory of the project.
 
-Eğer aşağıdaki aliaseslar mevcut değilse. Aşağıdaki kodu çalıştırın.
+If the following aliases are not available. Run the following code.
 
 ```bash
 $ cat xdocker/aliases >> ~/.bash_aliases
 ```
 
-> Kullandığınız terminal, varsayılan terminal değilse .bash_aliases dosyasını terminalinize uygun olan dosya adıyla değiştirin.
-> Örnek;
+> If the terminal you are using is not the default terminal, replace the .bash_aliases file with the appropriate file name for your terminal.
+> Example;
 >
 > - oh-my-zshrc > ~/.zshrc
-> - linux terminal > ~/.bash_aliases veya ~/.bashrc
+> - linux terminal > ~/.bash_aliases or ~/.bashrc
 > - mac terminal > ~/.profile
 
-Yukarıda ki aliasesları ekledikten sonra terminalden projenizin ana dizininde `rundockerrun` yazarak çalıştarabilirsiniz.
+After adding the above, you can work by typing `rundockerrun` in the main directory of your project.
 
-> Linux üzerindeki kurulumlarda root yetkisi gerekebilir. Böyle bir durumda `sudo rundockerrun` şeklinde çalıştırınız.
-> Eğer veritabanı parametrelerini(host, kullanıcı, şifre, vs..) güncellemek istiyorsanız `--dpu` opsiyonu ile çalıştırınız. Örnek: `rundockerrun --dpu`
+> Installation on Linux may require root privileges. In such a case, run `sudo rundockerrun`.
+> If you want to update the database parameters (host, user, password, etc.), please run with `--dpu` option. Example: `rundockerrun --dpu`
 
-Aşağıda aliases dosyası içerisindeki aliaslar yer almaktadır.
+Below are the alias in the aliases file.
 
 ---
 
 #### Xdebug
-Kurulum için `xdocker/php-fpm/php-ini-overrides.ini` dosyasında yer alan devre dışı bırakılmış aşağıda yer alan ayarların başında bulunan `;` karakterini kaldırınız.
+For installation, `xdocker/php-fpm/php-ini-overrides.ini` file is disabled in the following settings at the beginning of the `;`remove the character.
 ```
 ;zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20170718/xdebug.so
 ;xdebug.remote_host=host.docker.internal
@@ -59,29 +59,29 @@ Kurulum için `xdocker/php-fpm/php-ini-overrides.ini` dosyasında yer alan devre
 ;xdebug.idekey=PHPSTORM
 ```
 
-Yukarıdaki ayarları yaptıktan sonra PHPStorm'da `Preferences > Languages & Frameworks > PHP` tıklayınız. 
-1) `Debug` menüsüne tıklayın, sağ tarafta yer alan `Debug Port` değerini `9001` olarak ayarlayınız. Burası php.ini içerisindeki değerle aynı olmalıdır.
-2) `Debug` sonra yer alan `Servers` menüsüne tıklayın, açılan ekran `+`'ya tıklayarak yeni bir server ekleyiniz. `Host: localhost`, `Port: 80`, `Debugger: Xdebug` olacak şekilde ayarlayın.
-Hemen altında yer alan `Use path mappings`'e tıklayın açılan alanda `Project files` hemen altında yer alan proje dizininizin karşısında yer alan `Absolute path on the server` değerini `/application` olacak şekilde ayarlayın.
-3) Tekrar docker buildi aldıktan sonra [Chrome Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc) eklentisini indirin eklentiye tıklayıp debug seçeneğine tıklayın ve keyifli debuglar.
+After making the above settings, click `Preferences> Languages & Frameworks> PHP` in PHPStorm.
+1) Click the `Debug` menu and set the` Debug Port` at right side to `9001`. This should be the same as the value in php.ini.
+2) Click on the `Servers` menu after the `Debug`, click `+` to open a new server. `Host: localhost`, `Port: 80`, set to `Debugger: Xdebug`.
+In the drop down area, click on 'Use path mappings' and set `Absolute path on the server` to the `application/application` field opposite your project directory.
+3) Once you have the docker buildi, download the [Chrome Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc) plug-in, click on the plug-in, click on the debug option, and enjoy the debug.
 
-> Eğer eklentisiz yapmak istiyorsanız `xdebug.remote_autostart=1` şeklinde ayarlayarak otomatik olarak sürekli bağlanmayı sağlayabilirsiniz.
+> If you want to do without plug-in `xdebug.remote_autostart = 1` by setting the automatic connection to be able to provide continuous.
 
 ---
 
 #### SSL
-Varsayılan SSL Portu olan `443` portunun `docker-compose.yml` dosyasında bulunan `services > webserver > ports` altında `- 443:443` şeklinde tanımlandığından emin olun.
+Make sure that the `443` port, which is the default SSL Port, is defined as `- 443:443` under `services > webserver > ports` in `docker-compose.yml`.
 
-Aşağıda yer alan;
-1) **[Sertifika oluşturma](#sertifika-oluşturma)**
+In below;
+1) **[Certificate creation](#certificate-creation)**
 2) **[Nginx](#nginx)**
 3) **[MacOS](#macos)**
 
-adımlarını yaptıktan sonra projenin dizininde `dc build && rundockerrun` komutu çalıştırmayı unutmayınız.
+Do not forget to run `dc build && rundockerrun` in the directory of the project after performing the steps.
 
-###### Sertifika oluşturma
-Local geliştirme ortamınızda SSL oluşturmak için terminalden `cd xdocker/nginx/certs` komutunu çalıştırın.
-Aşağıdaki komutta bulunan `<domain>`'i local domaininiz ile değiştirerek gerekli sertifikaları oluşturun.
+###### Creating certificates
+To create SSL in your local development environment, run `cd xdocker/nginx/certs` from the terminal.
+Create the required certificates by replacing `<domain>` in the following command with your local domain.
 ```bash
 openssl req -x509 -out <domain>.local.crt -keyout <domain>.local.key \
   -newkey rsa:2048 -nodes -sha256 \
@@ -90,21 +90,21 @@ openssl req -x509 -out <domain>.local.crt -keyout <domain>.local.key \
 ```
 
 ###### Nginx
-Aşağıdaki dosyada yer alan satırların başındaki `#` karakterini kaldırarak sertifika kullanımını aktif hale getiriniz.
+Activate certificate usage by removing `#` at the beginning of the lines in the file below.
 
 `File: xdocker/nginx/nginx.conf.template`
 ```bash
 #listen 443 ssl http2;
-#listen [::]:443 ssl http2;
+#listen [::]: 443 ssl http2;
 #ssl on;
 #ssl_certificate /etc/nginx/certs/${NGINX_HOST}.crt;
 #ssl_certificate_key /etc/nginx/certs/${NGINX_HOST}.key;
 ```
 
 ###### MacOS
-1) **Keychain Access**'i açın, sol menüde yer alan **Keychains** altında yer alan **System**'e tıklayın. 
-2) Yukarıdaki menüden `File > Import Items` seçeneğine tıklayın ve açılan ekrandan oluşturduğunuz `<domain>.local.crt` dosyasını seçip `Add` seçeneğine tıklayın. (Şifre istenmesi durumunda bilgisayarınızın şifresini girin.)
-3) Sağ üstte yer alan `Search` kısmından `<domain>.local` şeklinde arama yapıp import ettiğiniz sertifikayı bulun ve üzerine çift tıklayın. Açılan pencerede `> Trust` yazısının okuna tıklayıp tab'ı genişletin. `When using this certificate:` karşısında bulunan seçeneklerden `Always Trust` seçeneğini seçin ve kapatın. `https://<domain>.local` şeklinde local ssl sertifikanız ile kullanmaya başlayabilirsiniz.
+1) **Open Keychain Access**, click **System** under **Keychains** in the left menu.
+2) Click `File> Import Items` from the menu above and select `<domain>.local.crt` which you created from the drop-down screen and click on `Add`. (Enter the password of your computer if you want a password.)
+3) On the top right, search from `Search` in the form `<domain>.local` and find the certificate you imported and double click on it. Click the arrow of `Trust` in the window that opens and expand tab. `When using this certificate:` Choose `Always Trust` from the available options and close. You can start using `https://<domain>.local` with your local ssl certificate.
 
 ---
 
