@@ -2,7 +2,26 @@
 
 If you do not have Docker installed in your environment, install the required docker [by clicking here](https://www.docker.com/community-edition).
 
-#### Included in the Existing Project
+#### Requirements
+
+- Docker (I think Docker Edge has better disk performance than Docker)
+- gem
+- docker-sync
+
+#### How to use with Symfony
+
+##### New Project
+
+You can create your new project with xDocker by running the following commands respectively.
+
+```bash
+$ composer create-project symfony/skeleton your-app
+$ git remote add xdocker git@github.com:emnsen/xdocker.git
+$ git pull xdocker master
+$ ./start.sh # you may want to take a look at the alias, maybe you use the `rundockerrun` command
+```
+
+##### Included in the Existing Project
 
 You can include the following commands in your current project by running them respectively.
 
@@ -47,7 +66,9 @@ Below are the alias in the aliases file.
 ---
 
 #### Xdebug
+
 For installation, `xdocker/php-fpm/php-ini-overrides.ini` file is disabled in the following settings at the beginning of the `;`remove the character.
+
 ```
 ;zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20170718/xdebug.so
 ;xdebug.remote_host=host.docker.internal
@@ -60,28 +81,33 @@ For installation, `xdocker/php-fpm/php-ini-overrides.ini` file is disabled in th
 ```
 
 After making the above settings, click `Preferences> Languages & Frameworks> PHP` in PHPStorm.
-1) Click the `Debug` menu and set the` Debug Port` at right side to `9001`. This should be the same as the value in php.ini.
-2) Click on the `Servers` menu after the `Debug`, click `+` to open a new server. `Host: localhost`, `Port: 80`, set to `Debugger: Xdebug`.
-In the drop down area, click on 'Use path mappings' and set `Absolute path on the server` to the `application/application` field opposite your project directory.
-3) Once you have the docker buildi, download the [Chrome Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc) plug-in, click on the plug-in, click on the debug option, and enjoy the debug.
+
+1. Click the `Debug` menu and set the`Debug Port` at right side to `9001`. This should be the same as the value in php.ini.
+2. Click on the `Servers` menu after the `Debug`, click `+` to open a new server. `Host: localhost`, `Port: 80`, set to `Debugger: Xdebug`.
+   In the drop down area, click on 'Use path mappings' and set `Absolute path on the server` to the `application/application` field opposite your project directory.
+3. Once you have the docker buildi, download the [Chrome Xdebug helper](https://chrome.google.com/webstore/detail/xdebug-helper/eadndfjplgieldjbigjakmdgkmoaaaoc) plug-in, click on the plug-in, click on the debug option, and enjoy the debug.
 
 > If you want to do without plug-in `xdebug.remote_autostart = 1` by setting the automatic connection to be able to provide continuous.
 
 ---
 
 #### SSL
+
 Make sure that the `443` port, which is the default SSL Port, is defined as `- 443:443` under `services > webserver > ports` in `docker-compose.yml`.
 
 In below;
-1) **[Certificate creation](#certificate-creation)**
-2) **[Nginx](#nginx)**
-3) **[MacOS](#macos)**
+
+1. **[Certificate creation](#certificate-creation)**
+2. **[Nginx](#nginx)**
+3. **[MacOS](#macos)**
 
 Do not forget to run `dc build && rundockerrun` in the directory of the project after performing the steps.
 
 ###### Creating certificates
+
 To create SSL in your local development environment, run `cd xdocker/nginx/certs` from the terminal.
 Create the required certificates by replacing `<domain>` in the following command with your local domain.
+
 ```bash
 openssl req -x509 -out <domain>.local.crt -keyout <domain>.local.key \
   -newkey rsa:2048 -nodes -sha256 \
@@ -90,9 +116,11 @@ openssl req -x509 -out <domain>.local.crt -keyout <domain>.local.key \
 ```
 
 ###### Nginx
+
 Activate certificate usage by removing `#` at the beginning of the lines in the file below.
 
 `File: xdocker/nginx/nginx.conf.template`
+
 ```bash
 #listen 443 ssl http2;
 #listen [::]: 443 ssl http2;
@@ -102,9 +130,10 @@ Activate certificate usage by removing `#` at the beginning of the lines in the 
 ```
 
 ###### MacOS
-1) **Open Keychain Access**, click **System** under **Keychains** in the left menu.
-2) Click `File> Import Items` from the menu above and select `<domain>.local.crt` which you created from the drop-down screen and click on `Add`. (Enter the password of your computer if you want a password.)
-3) On the top right, search from `Search` in the form `<domain>.local` and find the certificate you imported and double click on it. Click the arrow of `Trust` in the window that opens and expand tab. `When using this certificate:` Choose `Always Trust` from the available options and close. You can start using `https://<domain>.local` with your local ssl certificate.
+
+1. **Open Keychain Access**, click **System** under **Keychains** in the left menu.
+2. Click `File> Import Items` from the menu above and select `<domain>.local.crt` which you created from the drop-down screen and click on `Add`. (Enter the password of your computer if you want a password.)
+3. On the top right, search from `Search` in the form `<domain>.local` and find the certificate you imported and double click on it. Click the arrow of `Trust` in the window that opens and expand tab. `When using this certificate:` Choose `Always Trust` from the available options and close. You can start using `https://<domain>.local` with your local ssl certificate.
 
 ---
 
